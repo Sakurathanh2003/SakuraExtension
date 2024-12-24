@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-@available(iOS 13.0, *)
 public extension View {
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -19,7 +18,6 @@ public extension View {
     }
 }
 
-@available(iOS 13.0, *)
 public extension View {
     func onClickGesture(count: Int, coordinateSpace: CoordinateSpace = .local, perform action: @escaping (CGPoint) -> Void) -> some View {
         gesture(ClickGesture(count: count, coordinateSpace: coordinateSpace)
@@ -36,7 +34,6 @@ public extension View {
     }
 }
 
-@available(iOS 13.0, *)
 struct ClickGesture: Gesture {
     let count: Int
     let coordinateSpace: CoordinateSpace
@@ -70,13 +67,4 @@ struct ClickGesture: Gesture {
     }
 }
 
-@available(iOS 13.0, *)
-public struct RoundedCorner: Shape {
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-    
-    public func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
-    }
-}
+

@@ -4,7 +4,6 @@
 import SwiftUI
 import UIKit
 
-@available(iOS 14.0, *)
 struct ImagePicker: View {
     var isLightColor: Bool = false
     @Binding var selectedColor: Color
@@ -98,24 +97,4 @@ struct ImagePicker: View {
                                    saturation: isLightColor ? value : 1,
                                    brightness: isLightColor ? 1 : value)
     }
-}
-
-@available(iOS 14.0, *)
-struct Preview: View {
-    @State var color = Color(rgb: 0xFFD6A5)
-    
-    var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
-            
-            ImagePicker(isLightColor: false, selectedColor: $color)
-                .padding(.horizontal, 20)
-                .frame(height: 300)
-        }
-    }
-}
-
-@available(iOS 14.0, *)
-#Preview {
-    Preview()
 }

@@ -7,7 +7,6 @@
 import Foundation
 import SwiftUI
 
-@available(iOS 13.0, *)
 public extension Color {
     init(rgb: Int, alpha: Double = 1) {
         self.init(
@@ -41,5 +40,61 @@ public extension Color {
             blue:  Double(b) / 255,
             opacity: Double(a) / 255
         )
+    }
+    
+    func toHex() -> String? {
+        let uic = UIColor(self)
+        guard let components = uic.cgColor.components, components.count >= 3 else {
+            return nil
+        }
+        let r = Float(components[0])
+        let g = Float(components[1])
+        let b = Float(components[2])
+        var a = Float(1.0)
+
+        if components.count >= 4 {
+            a = Float(components[3])
+        }
+
+        if a != Float(1.0) {
+            return String(format: "%02lX%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255), lroundf(a * 255))
+        } else {
+            return String(format: "%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255))
+        }
+    }
+    
+    func toHex() -> Int {
+        let uic = UIColor(self)
+        guard let components = uic.cgColor.components, components.count < 3 else {
+            return 0
+        }
+        
+        let r = Float(components[0])
+        let g = Float(components[1])
+        let b = Float(components[2])
+        
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        return rgb
+    }
+    
+    static func hsbToInt(hue: CGFloat, saturation: CGFloat, brightness: CGFloat) -> Int {
+        // Convert HSB to RGB
+        let rgb = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
+        
+        // Get the RGBA components
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        rgb.getRed(&red, green: &green, blue: &blue, alpha: nil)
+        
+        // Convert RGB components to an integer in the format 0xRRGGBB
+        let redInt = Int(red * 255)
+        let greenInt = Int(green * 255)
+        let blueInt = Int(blue * 255)
+        
+        // Combine the RGB values into a single integer
+        let hexColor = (redInt << 16) | (greenInt << 8) | blueInt
+        
+        return hexColor
     }
 }
