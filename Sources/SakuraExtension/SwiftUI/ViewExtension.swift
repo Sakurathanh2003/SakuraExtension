@@ -17,11 +17,12 @@ public extension View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
     
-    func foreColor(_ color: Color) -> Text {
-        if #available(iOS 17.0, *) {
-            self.foregroundStyle(color)
+    @ViewBuilder
+    func foreColor(_ color: Color) -> some View {
+        if #available(iOS 15.0, *) {
+            foregroundStyle(color)
         } else {
-            self.foregroundColor(color)
+            foregroundColor(color)
         }
     }
 }
