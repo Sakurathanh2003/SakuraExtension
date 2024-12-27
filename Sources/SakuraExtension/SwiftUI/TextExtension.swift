@@ -10,14 +10,6 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 public extension Text {
-    func foreColor(_ color: Color) -> Text {
-        if #available(iOS 17.0, *) {
-            self.foregroundStyle(color)
-        } else {
-            self.foregroundColor(color)
-        }
-    }
-    
     func autoResize(numberLines: Int) -> some View {
         self.scaledToFit()
             .minimumScaleFactor(0.5)

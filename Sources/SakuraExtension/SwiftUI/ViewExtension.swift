@@ -16,6 +16,14 @@ public extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
+    
+    func foreColor(_ color: Color) -> Text {
+        if #available(iOS 17.0, *) {
+            self.foregroundStyle(color)
+        } else {
+            self.foregroundColor(color)
+        }
+    }
 }
 
 public extension View {
