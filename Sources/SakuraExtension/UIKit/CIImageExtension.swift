@@ -9,7 +9,7 @@ import Foundation
 import CoreImage
 import UIKit
 
-extension CIImage {
+public extension CIImage {
     func rotate(radians: CGFloat?) -> CIImage {
         guard let radians = radians else {
             return self
@@ -33,7 +33,7 @@ extension CIImage {
     }
 }
 
-extension CIImage {
+public extension CIImage {
     var image: UIImage { .init(ciImage: self) }
     
     func colorized(with color: UIColor) -> CIImage? {
