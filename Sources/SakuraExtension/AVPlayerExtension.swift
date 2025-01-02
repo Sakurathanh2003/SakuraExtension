@@ -14,7 +14,7 @@ public extension AVPlayer {
     }
     
     var preferredTimescale: CMTimeScale {
-        return 10000
+        return CMTimeScale(NSEC_PER_SEC)
     }
     
     func seek(percent: CGFloat) {
