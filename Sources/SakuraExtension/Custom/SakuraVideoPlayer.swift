@@ -103,12 +103,12 @@ public class SakuraVideoPlayer: AVPlayer {
     }
     
     // MARK: - Seek
-    func seekTo(_ time: TimeInterval) {
+    public func seekTo(_ time: TimeInterval) {
         let cmtime = CMTime.init(seconds: time, preferredTimescale: 1)
         self.seek(to: cmtime, toleranceBefore: .zero, toleranceAfter: .zero)
     }
     
-    func seekTo(_ time: CMTime) {
+    public func seekTo(_ time: CMTime) {
         self.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero)
     }
     
@@ -130,6 +130,7 @@ public class SakuraVideoPlayer: AVPlayer {
     
     private func initPlayer() {
         self.addObserver(self, forKeyPath: "rate", options: [.initial, .old, .new], context: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidPlayToEnd(_:)), name: .AVPlayerItemDidPlayToEndTime, object: self.currentItem)
     }
     
     public func setRate(rate: Float) {
