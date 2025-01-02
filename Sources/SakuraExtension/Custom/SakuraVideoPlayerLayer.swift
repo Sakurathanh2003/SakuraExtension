@@ -13,6 +13,11 @@ public struct SakuraVideoPlayerLayer {
     var player: AVPlayer
     var videoGravity: AVLayerVideoGravity
     
+    public init(player: AVPlayer, videoGravity: AVLayerVideoGravity) {
+        self.player = player
+        self.videoGravity = videoGravity
+    }
+    
     public class PlayerViewController: UIViewController {
         var playerLayer: AVPlayerLayer!
         var player: AVPlayer
