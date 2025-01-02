@@ -28,7 +28,7 @@ public extension AVPlayer {
     
     func forwardVideo(by seconds: Double) {
         let currentTime = self.currentTime()
-        let newTime = min(currentTime.seconds + seconds, duration.seconds)
+        let newTime = currentTime.seconds + seconds
         let time = CMTime(seconds: newTime, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         self.seek(to: time)
     }
