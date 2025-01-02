@@ -19,26 +19,18 @@ public extension AVPlayer {
         self.seek(to: time)
     }
     
-    func rewindVideo(by seconds: Float64) {
+    func rewindVideo(by seconds: Double) {
         let currentTime = self.currentTime()
-        var newTime = CMTimeGetSeconds(currentTime) - seconds
-        if newTime <= 0 {
-            newTime = 0
-        }
-        
-        self.seek(to: CMTime(value: CMTimeValue(newTime * 1000), timescale: 1000))
-        
+        let newTime = max(currentTime.seconds - seconds, 0.0)
+        self.seek(to: CMTime(value: CMTimeValue(newTime), timescale: 1000))
     }
     
-    func forwardVideo(by seconds: Float64) {
+    func forwardVideo(by seconds: Double) {
         if let duration = self.currentItem?.duration {
-            let currentTime = self.currentTime()
-            var newTime = CMTimeGetSeconds(currentTime) + seconds
-            if newTime >= CMTimeGetSeconds(duration) {
-                newTime = CMTimeGetSeconds(duration)
-            }
+            let currentTime = self.currentTime().seconds
+            var newTime = min(currentTime + seconds, duration.seconds)
             
-            self.seek(to: CMTime(value: CMTimeValue(newTime * 1000), timescale: 1000))
+            self.seek(to: CMTime(seconds: newTime, preferredTimescale: 10000))
         }
     }
 }
