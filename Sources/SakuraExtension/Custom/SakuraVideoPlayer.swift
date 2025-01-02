@@ -25,6 +25,7 @@ public class SakuraVideoPlayer: AVPlayer {
     public var pauseWhenEnterBackground: Bool = false
     private var timerObserver: Any?
     public var isFailed: Bool = false
+    private var registerStatus: Bool = false
 
     deinit {
         self.removeObserves()
@@ -33,7 +34,8 @@ public class SakuraVideoPlayer: AVPlayer {
     // MARK: - Observer
     func removeObserves() {
         self.removeObserver(self, forKeyPath: "rate")
-        if let playerItem = self.currentItem {
+        
+        if let playerItem = self.currentItem, registerStatus {
             playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
         }
     }
@@ -146,12 +148,14 @@ public class SakuraVideoPlayer: AVPlayer {
 
             oldItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
             NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: oldItem)
+            self.registerStatus = false
         }
 
         self.replaceCurrentItem(with: item)
         if item != nil {
             item?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.new], context: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidPlayToEnd(_:)), name: .AVPlayerItemDidPlayToEndTime, object: item!)
+            self.registerStatus = true
         }
 
         return true
