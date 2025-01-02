@@ -48,4 +48,26 @@ public extension CIImage {
         else { return nil }
         return colorMatrix.outputImage
     }
+    
+    var buffer: CVPixelBuffer? {
+        var pixelBuffer: CVPixelBuffer?
+        let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
+                     kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
+
+        let size = image.size
+        let width: Int = Int(size.width)
+        let height: Int = Int(size.height)
+        
+        CVPixelBufferCreate(kCFAllocatorDefault,
+                            width,
+                            height,
+                            kCVPixelFormatType_32BGRA,
+                            attrs,
+                            &pixelBuffer)
+        
+        let context = CIContext()
+        context.render(self, to: pixelBuffer!)
+
+        return pixelBuffer
+    }
 }
