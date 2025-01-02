@@ -22,15 +22,14 @@ public extension AVPlayer {
     func rewindVideo(by seconds: Double) {
         let currentTime = self.currentTime()
         let newTime = max(currentTime.seconds - seconds, 0.0)
-        self.seek(to: CMTime(value: CMTimeValue(newTime), timescale: 1000))
+        let time = CMTime(seconds: newTime, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        self.seek(to: time)
     }
     
     func forwardVideo(by seconds: Double) {
-        if let duration = self.currentItem?.duration {
-            let currentTime = self.currentTime().seconds
-            var newTime = min(currentTime + seconds, duration.seconds)
-            
-            self.seek(to: CMTime(seconds: newTime, preferredTimescale: 10000))
-        }
+        let currentTime = self.currentTime()
+        let newTime = min(currentTime.seconds + seconds, duration.seconds)
+        let time = CMTime(seconds: newTime, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        self.seek(to: time)
     }
 }
