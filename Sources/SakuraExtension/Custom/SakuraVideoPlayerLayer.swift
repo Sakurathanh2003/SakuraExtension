@@ -9,11 +9,11 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
-struct SakuraVideoPlayerLayer: UIViewControllerRepresentable {
+public struct SakuraVideoPlayerLayer {
     var player: AVPlayer
     var videoGravity: AVLayerVideoGravity
     
-    class PlayerViewController: UIViewController {
+    public class PlayerViewController: UIViewController {
         var playerLayer: AVPlayerLayer!
         var player: AVPlayer
         var videoGravity: AVLayerVideoGravity
@@ -28,7 +28,7 @@ struct SakuraVideoPlayerLayer: UIViewControllerRepresentable {
             fatalError("init(coder:) has not been implemented")
         }
         
-        override func viewDidLoad() {
+        public override func viewDidLoad() {
             super.viewDidLoad()
             
             // Setup AVPlayerLayer
@@ -39,23 +39,24 @@ struct SakuraVideoPlayerLayer: UIViewControllerRepresentable {
             view.layer.addSublayer(playerLayer)
         }
         
-        override func viewWillLayoutSubviews() {
+        public override func viewWillLayoutSubviews() {
             super.viewWillLayoutSubviews()
             playerLayer.frame = view.bounds
         }
         
-        override func viewDidLayoutSubviews() {
+        public override func viewDidLayoutSubviews() {
             super.viewDidLayoutSubviews()
             playerLayer.frame = view.bounds
         }
     }
-    
-    func makeUIViewController(context: Context) -> PlayerViewController {
+}
+
+extension SakuraVideoPlayerLayer: UIViewControllerRepresentable {
+    public func makeUIViewController(context: Context) -> PlayerViewController {
         return PlayerViewController(player: player, videoGravity: videoGravity)
     }
     
-    func updateUIViewController(_ uiViewController: PlayerViewController, context: Context) {
-        // Update the player layer when needed
+    public func updateUIViewController(_ uiViewController: PlayerViewController, context: Context) {
         uiViewController.playerLayer.player = player
     }
 }
