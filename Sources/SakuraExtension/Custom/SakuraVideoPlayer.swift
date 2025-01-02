@@ -123,7 +123,7 @@ public class SakuraVideoPlayer: AVPlayer {
         self.delegate?.videoPlayerUpdatePlayingState?(self, isPlaying: false)
     }
     
-    func config() {
+    public func config() {
         initPlayer()
         registerNotifications()
     }
@@ -132,7 +132,7 @@ public class SakuraVideoPlayer: AVPlayer {
         self.addObserver(self, forKeyPath: "rate", options: [.initial, .old, .new], context: nil)
     }
     
-    func setRate(rate: Float) {
+    public func setRate(rate: Float) {
         self.rate = rate
     }
    
@@ -156,7 +156,7 @@ public class SakuraVideoPlayer: AVPlayer {
         return true
     }
 
-    func addPlayerObserver() {
+    public func addPlayerObserver() {
         let interval = CMTime(value: 1, timescale: CMTimeScale(NSEC_PER_SEC))
         timerObserver = self.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { [weak self] time in
             guard let self = self else { return }
@@ -171,7 +171,7 @@ public class SakuraVideoPlayer: AVPlayer {
         })
     }
     
-    func removePlayerObserver() {
+    public func removePlayerObserver() {
         if let timerObserver = timerObserver {
             self.removeTimeObserver(timerObserver)
         }
