@@ -9,18 +9,18 @@ import AVFoundation
 import UIKit
 import MediaPlayer
 
-@objc public protocol VideoPlayerDelegate: AnyObject {
-    @objc optional func videoPlayerBeganInterruptAudioSession(_ player: VideoPlayer)
-    @objc optional func videoPlayerUpdatePlayingState(_ player: VideoPlayer, isPlaying: Bool)
-    @objc optional func videoPlayerDidPlaying(_ player: VideoPlayer, _ progress: Double)
-    @objc optional func videoPlayerReadyToPlay(_ player: VideoPlayer)
-    @objc optional func videoPlayerFailToLoad(_ player: VideoPlayer)
-    @objc optional func videoPlayerPlayToEnd(_ player: VideoPlayer)
-    @objc optional func videoPlayerAudioRouteChanged(_ player: VideoPlayer, isPlaying: Bool)
+@objc public protocol SakuraVideoPlayerDelegate: AnyObject {
+    @objc optional func videoPlayerBeganInterruptAudioSession(_ player: SakuraVideoPlayer)
+    @objc optional func videoPlayerUpdatePlayingState(_ player: SakuraVideoPlayer, isPlaying: Bool)
+    @objc optional func videoPlayerDidPlaying(_ player: SakuraVideoPlayer, _ progress: Double)
+    @objc optional func videoPlayerReadyToPlay(_ player: SakuraVideoPlayer)
+    @objc optional func videoPlayerFailToLoad(_ player: SakuraVideoPlayer)
+    @objc optional func videoPlayerPlayToEnd(_ player: SakuraVideoPlayer)
+    @objc optional func videoPlayerAudioRouteChanged(_ player: SakuraVideoPlayer, isPlaying: Bool)
 }
 
-public class VideoPlayer: AVPlayer {
-    public weak var delegate: VideoPlayerDelegate?
+public class SakuraVideoPlayer: AVPlayer {
+    public weak var delegate: SakuraVideoPlayerDelegate?
     public var loopEnable: Bool = false
     public var pauseWhenEnterBackground: Bool = false
     private var timerObserver: Any?
@@ -188,11 +188,7 @@ public class VideoPlayer: AVPlayer {
 }
 
 // MARK: - Get
-public extension VideoPlayer {
-    var duration: CMTime {
-        return self.currentItem?.duration ?? .zero
-    }
-    
+public extension SakuraVideoPlayer {
     var isPlaying: Bool {
         return self.rate != 0
     }
