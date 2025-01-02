@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension FileManager {
+public extension FileManager {
     static func documentPath() -> String {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
     }
