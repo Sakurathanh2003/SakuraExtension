@@ -104,7 +104,7 @@ public class SakuraVideoPlayer: AVPlayer {
     
     // MARK: - Seek
     public func seekTo(_ time: TimeInterval) {
-        let cmtime = CMTime.init(seconds: time, preferredTimescale: 1)
+        let cmtime = CMTime.init(seconds: time, preferredTimescale: preferredTimescale)
         self.seek(to: cmtime, toleranceBefore: .zero, toleranceAfter: .zero)
     }
     
@@ -158,7 +158,7 @@ public class SakuraVideoPlayer: AVPlayer {
     }
 
     public func addPlayerObserver() {
-        let interval = CMTime(value: 1, timescale: CMTimeScale(NSEC_PER_SEC))
+        let interval = CMTime(value: 1, timescale: 1)
         timerObserver = self.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { [weak self] time in
             guard let self = self else { return }
             
