@@ -11,13 +11,16 @@ import AVFoundation
 
 struct SakuraVideoPlayerLayer: UIViewControllerRepresentable {
     var player: AVPlayer
+    var videoGravity: AVLayerVideoGravity
     
     class PlayerViewController: UIViewController {
         var playerLayer: AVPlayerLayer!
         var player: AVPlayer
+        var videoGravity: AVLayerVideoGravity
         
-        init(player: AVPlayer) {
+        init(player: AVPlayer, videoGravity: AVLayerVideoGravity) {
             self.player = player
+            self.videoGravity = videoGravity
             super.init(nibName: nil, bundle: nil)
         }
         
@@ -32,7 +35,7 @@ struct SakuraVideoPlayerLayer: UIViewControllerRepresentable {
             playerLayer = AVPlayerLayer()
             playerLayer.player = player
             playerLayer.frame = view.bounds
-            playerLayer.videoGravity = .resizeAspectFill
+            playerLayer.videoGravity = videoGravity
             view.layer.addSublayer(playerLayer)
         }
         
@@ -48,7 +51,7 @@ struct SakuraVideoPlayerLayer: UIViewControllerRepresentable {
     }
     
     func makeUIViewController(context: Context) -> PlayerViewController {
-        return PlayerViewController(player: player)
+        return PlayerViewController(player: player, videoGravity: videoGravity)
     }
     
     func updateUIViewController(_ uiViewController: PlayerViewController, context: Context) {
