@@ -70,4 +70,19 @@ public extension CIImage {
 
         return pixelBuffer
     }
+    
+    func cropToCenter(size: CGSize) -> CIImage {
+        // Get the image's extent (bounding box)
+        let imageExtent = self.extent
+        
+        // Calculate the origin of the crop rectangle to center it
+        let centerX = (imageExtent.width - size.width) / 2
+        let centerY = (imageExtent.height - size.height) / 2
+        
+        // Define the crop rectangle based on the center and desired size
+        let cropRect = CGRect(x: centerX, y: centerY, width: size.width, height: size.height)
+        
+        // Crop the image using .cropped(to:)
+        return self.cropped(to: cropRect)
+    }
 }
