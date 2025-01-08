@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Date {
+public extension Date {
     public var calendar: Calendar {
         return NSCalendar.current
     }

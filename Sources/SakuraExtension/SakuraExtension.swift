@@ -4,7 +4,7 @@
 import SwiftUI
 import UIKit
 
-struct ImagePicker: View {
+public struct ImagePicker: View {
     var isLightColor: Bool = false
     @Binding var selectedColor: Color
     @State var location: CGSize = .zero
