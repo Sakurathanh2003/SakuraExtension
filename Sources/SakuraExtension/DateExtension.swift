@@ -8,27 +8,27 @@
 import Foundation
 
 public extension Date {
-    public var calendar: Calendar {
+    var calendar: Calendar {
         return NSCalendar.current
     }
 
-    public var era: Int {
+    var era: Int {
         return calendar.component(.era, from: self)
     }
 
-    public var quarter: Int {
+    var quarter: Int {
         return calendar.component(.quarter, from: self)
     }
 
-    public var weekOfYear: Int {
+    var weekOfYear: Int {
         return calendar.component(.weekOfYear, from: self)
     }
 
-    public var weekOfMonth: Int {
+    var weekOfMonth: Int {
         return calendar.component(.weekOfMonth, from: self)
     }
 
-    public var year: Int {
+    var year: Int {
         get {
             return calendar.component(.year, from: self)
         }
@@ -41,7 +41,7 @@ public extension Date {
         }
     }
 
-    public var month: Int {
+    var month: Int {
         get {
             return calendar.component(.month, from: self)
         }
@@ -54,7 +54,7 @@ public extension Date {
         }
     }
 
-    public var day: Int {
+    var day: Int {
         get {
             return calendar.component(.day, from: self)
         }
@@ -67,7 +67,7 @@ public extension Date {
         }
     }
 
-    public var weekday: Int {
+    var weekday: Int {
         get {
             return calendar.component(.weekday, from: self)
         }
@@ -80,7 +80,7 @@ public extension Date {
         }
     }
 
-    public var hour: Int {
+    var hour: Int {
         get {
             return calendar.component(.hour, from: self)
         }
@@ -93,7 +93,7 @@ public extension Date {
         }
     }
 
-    public var minute: Int {
+    var minute: Int {
         get {
             return calendar.component(.minute, from: self)
         }
@@ -106,7 +106,7 @@ public extension Date {
         }
     }
 
-    public var second: Int {
+    var second: Int {
         get {
             return calendar.component(.second, from: self)
         }
@@ -119,7 +119,7 @@ public extension Date {
         }
     }
 
-    public var nanosecond: Int {
+    var nanosecond: Int {
         get {
             return calendar.component(.nanosecond, from: self)
         }
@@ -130,7 +130,7 @@ public extension Date {
         }
     }
 
-    public var millisecond: Int {
+    var millisecond: Int {
         get {
             return calendar.component(.nanosecond, from: self) / 1000000
         }
@@ -142,36 +142,36 @@ public extension Date {
         }
     }
 
-    public var isInFuture: Bool {
+    var isInFuture: Bool {
         return self > Date()
     }
 
-    public var isInPast: Bool {
+    var isInPast: Bool {
         return self < Date()
     }
 
-    public var isInYesterday: Bool {
+    var isInYesterday: Bool {
         return calendar.isDateInYesterday(self)
     }
 
-    public var isInTomorrow: Bool {
+    var isInTomorrow: Bool {
         return calendar.isDateInTomorrow(self)
     }
 
-    public var isInWeekend: Bool {
+    var isInWeekend: Bool {
         return calendar.isDateInWeekend(self)
     }
 
-    public var isInWeekday: Bool {
+    var isInWeekday: Bool {
         return !calendar.isDateInWeekend(self)
     }
 
 
-    public var timeZone: TimeZone {
+    var timeZone: TimeZone {
         return calendar.timeZone
     }
 
-    public var unixTimestamp: Double {
+    var unixTimestamp: Double {
         return timeIntervalSince1970
     }
 

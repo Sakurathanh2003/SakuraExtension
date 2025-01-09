@@ -15,9 +15,7 @@ public extension URL {
         return pathExtension == "mp4" || pathExtension == "mov"
     }
     
-    func getThumbnailImage() -> UIImage? {
-        let pathExtension = self.pathExtension
-        
+    func getThumbnailImage() -> UIImage? {        
         if !isVideo {
             return UIImage(contentsOfFile: self.path)
         }
