@@ -11,7 +11,7 @@ import SwiftUI
 public struct BlurSwiftUIView: UIViewRepresentable {
     var effect: UIBlurEffect
     
-    init(effect: UIBlurEffect) {
+    public init(effect: UIBlurEffect) {
         self.effect = effect
     }
     
